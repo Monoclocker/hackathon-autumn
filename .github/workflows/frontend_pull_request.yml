@@ -1,0 +1,32 @@
+name: Frontend CI
+on:
+  pull_request:
+    branches:
+      - dev
+    types: [opened, synchronize, reopened]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - name: setup node
+      uses: actions/setup-node@v4
+      with:
+        node-version: 'latest'
+    - name: checkout
+      uses: actions/checkout@v4.2.2
+      with:
+        ref: frontend
+    - name: lint
+      run: cd frontend
+    - run: npm run lint
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@v4.2.2
+      with:
+        ref: frontend
+    - name: test 
+      run: cd frontend
+    - run: npm run unit-test
