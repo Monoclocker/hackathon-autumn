@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import Input from '../../components/Input/Input';
 import ButtonForm from '../../components/ButtonForm/ButtonForm';
+import MainLogo from '../../components/MainLogo/MainLogo';
 
 export default function LoginPage() {
 
@@ -33,6 +34,7 @@ export default function LoginPage() {
 
   return (
     <div className={styles['container']}>
+      <MainLogo />
       <h1>Авторизация</h1>
       <form method="GET">
         <div className={styles['login-form']}>
