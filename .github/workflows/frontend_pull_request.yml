@@ -19,6 +19,7 @@ jobs:
         ref: frontend
     - name: lint
       run: cd frontend
+    - run: ls
     - run: npm install
     - run: npm run lint
   frontend_test:
