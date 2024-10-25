@@ -1,7 +1,7 @@
 name: GO CI
 on:
   pull_request:
-    types: [opened, syncronize, reopened]
+    types: [opened, synchronize, reopened]
     branches: dev
 jobs:
   go_test:
