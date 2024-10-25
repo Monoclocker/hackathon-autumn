@@ -15,6 +15,9 @@ jobs:
         uses: actions/checkout@v4.2.2
         with: 
           ref: python-backend
+      - name: install dependencies
+        working-directory: ./hackathon_backend
+        run: pip install --no-cache-dir -r requirements.txt
       - name: run tests
-        run: cd hackathon_backend/tests/tests_utils
-      - run: python -m unittest discover
+        working-directory: ./hackathon_backend/tests/tests_utils
+        run: python -m unittest discover
