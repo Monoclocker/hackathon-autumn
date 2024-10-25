@@ -7,6 +7,8 @@ import RegisterPage from './pages/RegisterPage/RegisterPage';
 function App() {
   usePageStyles();
 
+  //сделай пути в виде констант
+
   return (
     <Routes>
 

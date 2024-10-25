@@ -1,19 +1,22 @@
 import styles from './LoginPage.module.scss';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import Input from '../../components/Input/Input';
 import ButtonForm from '../../components/ButtonForm/ButtonForm';
+import { authAPI } from '../../api/authAPI';
+import GetUserRequest from '../../dto/requests/auth/GetUserRequest';
 
 export default function LoginPage() {
 
-  const [loginForm, setLoginForm] = useState({
-    login: "",
+  const [loginForm, setLoginForm] = useState<GetUserRequest>({
+    username: "",
     password: ""
   });
 
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
+  const navigate = useNavigate()
 
   const handleChangeLoginForm = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -25,10 +28,17 @@ export default function LoginPage() {
 
 
 
-  const handleBtnClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const handleBtnClick = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.preventDefault();
 
-    // Тут fetch
+    const api = new authAPI()
+    
+    if (await api.Login(loginForm) !== true){
+      //вот тут сделай отображение ошибки
+    }
+
+    navigate("") // а тут маршрут
+
   }
 
   return (
@@ -37,7 +47,7 @@ export default function LoginPage() {
       <form method="GET">
         <div className={styles['login-form']}>
           <div className={styles["login-form__input-wrapper"]}>
-            <Input className={"login-form__input"} placeholder={"Логин"} id={"login"} type={"text"} name={"login"} value={loginForm.login} onChange={handleChangeLoginForm} required={true} />
+            <Input className={"login-form__input"} placeholder={"Логин"} id={"login"} type={"text"} name={"login"} value={loginForm.username} onChange={handleChangeLoginForm} required={true} />
           </div>
           <div className={styles["login-form__input-wrapper"]}>
             <Input className={styles["login-form__input"]} id="password" placeholder="Пароль" type={isPasswordVisible ? "text" : "password"} name="password" value={loginForm.password} onChange={handleChangeLoginForm} required={true} />
