@@ -1,0 +1,40 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+
+    &__input-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+    &__input {
+        padding-right: 40px; /* Отступ справа для иконки */
+    }
+
+    &__input-icon {
+        position: absolute;
+        right: 10px;
+        cursor: pointer;
+        transition: transform 0.3s ease-in-out;
+
+        &:hover {
+            transform: scale(1.2);
+        }
+    }
+}
+
+.text-for-registr {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    margin-top: 13px;
+}

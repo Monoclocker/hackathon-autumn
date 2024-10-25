@@ -1,0 +1,19 @@
+.button-form {
+    border-radius: 15px;
+    color: rgba(40, 43, 49, 1);
+    border: 2px solid rgba(23, 80, 255, 1);
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    text-align: center;
+    background-color: inherit;
+    cursor: pointer;
+
+    &:hover {
+        background-color: rgba(23, 80, 255, 1);
+        color: white;
+    }
+}
