@@ -3,6 +3,7 @@ import styles from './RegisterPage.module.scss';
 import { useNavigate } from 'react-router-dom';
 import Input from "../../components/Input/Input";
 import { useState } from "react";
+import MainLogo from "../../components/MainLogo/MainLogo";
 
 export default function RegisterPage() {
   const location = useNavigate();
@@ -29,6 +30,7 @@ export default function RegisterPage() {
 
   return (
     <div className={styles['container']}>
+      <MainLogo />
       <h1>Регистрация</h1>
       <form method="POST">
         <div className={styles["registr-form"]}>
