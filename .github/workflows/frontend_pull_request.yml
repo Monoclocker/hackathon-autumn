@@ -6,7 +6,7 @@ on:
     types: [opened, synchronize, reopened]
 
 jobs:
-  fronend_lint:
+  frontend_lint:
     runs-on: ubuntu-latest
     steps:
     - name: setup node
@@ -21,6 +21,7 @@ jobs:
       run: cd frontend
     - run: npm run lint
   frontend_test:
+    needs: [frontend_lint]
     runs-on: ubuntu-latest
     steps:
     - name: checkout
