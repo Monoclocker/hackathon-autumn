@@ -4,7 +4,7 @@ on:
     types: [opened, synchronize, reopened]
     branches: dev
 jobs:
-  test:
+  python_test:
     runs-on: ubuntu-latest
     steps:
       - name: setup python
