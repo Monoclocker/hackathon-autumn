@@ -1,12 +1,16 @@
 name: GO CI
 on:
   pull_request:
+
     types: [opened, synchronize, reopened]
+
     branches: dev
 jobs:
   go_test:
     runs-on: ubuntu-latest
+
     if: github.event.pull_request.head.ref == 'go-backend'
+
     steps:
       - name: setup go
         uses: actions/setup-go@v5.1.0
