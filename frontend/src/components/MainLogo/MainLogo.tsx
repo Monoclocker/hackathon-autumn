@@ -7,7 +7,7 @@ export default function MainLogo() {
       <div className={styles["main-logo__icon"]} id="main-logo">
         <svg
           width="35"
-          height="35"
+          height="33"
           viewBox="0 -5 20 20"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
