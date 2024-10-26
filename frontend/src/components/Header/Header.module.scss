@@ -1,0 +1,14 @@
+.header {
+  margin: 25px 0;
+
+  @media (max-width: 860px) {
+    margin: 10px 0;
+  }
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+  }
+}

@@ -1,0 +1,86 @@
+version: '3.7'
+
+services:
+  frontend: 
+    container_name: frontend
+    build:
+      context: ./frontend
+      dockerfile: dockerfile
+    ports:
+      - '80:80'
+
+  auth-service:
+    container_name: auth
+    build:
+      context: ./auth-service
+      dockerfile: dockerfile
+    ports:
+      - '5000:5000'
+    command: bash -c "go run . main"
+    depends_on:
+      - auth-db
+    environment:
+      - CONNECTION_STRING=${AUTH_CONNECTION_STRING}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+
+  parser-db:
+    image: postgres:16
+    volumes:
+      - ./hackathon_backend/pg-init-scripts:/docker-entrypoint-initdb.d
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - parser_network
+    ports:
+      - "5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_MULTIPLE_DATABASES=parser
+
+  auth-db:
+    image: postgres:16
+    networks:
+      - auth_network
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_MULTIPLE_DATABASES=parser
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    restart: on-failure
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_CONFIG_CONSOLE_LOG_LEVEL: 250
+    ports:
+      - "5050:80"
+    logging:
+      driver: none
+
+  editor:
+    build:
+      context: ./hackathon_backend
+      target: build
+    env_file:
+      - ./hackathon_backend/.env
+    environment:
+      - DB_URI=postgresql+asyncpg://postgres:postgres@db:5432/parser
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+    networks:
+      - parser_network
+    volumes:
+      - ./hackathon_backend:/usr/hackathon_backend
+    ports:
+      - "8001:8001"
+    command: bash -c "sleep 1 && uvicorn parser.app:app --host 0.0.0.0 --port 8001 --reload"
+    depends_on:
+      - db
+    restart: on-failure
+
+volumes:
+  pgdata:
+
+
