@@ -1,11 +1,12 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 
 export default function usePageStyles() {
   const location = useLocation();
+  const bodyRef = useRef(document.body); // Создаем реф для body
 
   useEffect(() => {
-    const body = document.getElementsByTagName("body")[0];
+    const body = bodyRef.current; // Получаем текущий элемент body
     if (
       location.pathname === "/login" ||
       location.pathname === "/registration"
@@ -15,8 +16,8 @@ export default function usePageStyles() {
       body.style.alignItems = "center";
     } else {
       body.style.display = "block";
-      body.style.justifyContent = "null";
-      body.style.alignItems = "null";
+      body.style.justifyContent = "";
+      body.style.alignItems = "";
     }
 
     return () => {
@@ -26,5 +27,3 @@ export default function usePageStyles() {
     };
   }, [location]);
 }
-
-// Хук, котрый меняет стили body, если пользователь на странице регистрации или авторизации, то форма будет в центре по вертикали и горизонтали
