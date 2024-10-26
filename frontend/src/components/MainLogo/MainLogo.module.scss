@@ -1,13 +1,13 @@
 .main-logo {
-    display: flex;
-    margin: 1em 0;
-    justify-content: center;
+  display: flex;
+  margin: 1em 0;
+  justify-content: center;
+  text-align: center;
+  &__icon {
+    width: 50px;
+    height: 50px;
+    background: rgba(68, 71, 226, 1);
+    border-radius: 50%;
     text-align: center;
-    &__icon {
-        width: 45px;
-        height: 45px;
-        background: rgba(68, 71, 226, 1);
-        border-radius: 50%;
-        text-align: center;
-    }
+  }
 }
