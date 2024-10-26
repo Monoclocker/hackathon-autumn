@@ -1,5 +1,5 @@
 import { PageResponse } from "../dto/responses/parser/PageResponse"
-import { SystemDataResponse } from "../dto/responses/parser/SystemDataResponse"
+import { SystemData } from "../dto/SystemData"
 import { WebClient } from "../webclient/WebClient"
 import { authAPI } from "./authAPI"
 
@@ -20,7 +20,7 @@ export class parserAPI{
             return Array<string>()
         }
 
-        return (response.data as SystemDataResponse).marketplaces
+        return (response.data as SystemData).marketplaces
     }
 
     async getData(searchText: string, marketplaces: string[]){
@@ -43,7 +43,7 @@ export class parserAPI{
     
             token = localStorage.getItem('accessToken')
     
-            let response = await this.webclient.Get(baseUrl + element + `?search_text=${searchText}`, token!)
+            let response = await this.webclient.Get(baseUrl + element + `?search_text=${searchText}&marketplaces=${marketplaces}`, token!)
     
             if (response.statusCode === 401 && !await this.auth.Refresh()){
                 return false
@@ -51,7 +51,7 @@ export class parserAPI{
     
             token = localStorage.getItem('accessToken')
     
-            response = await this.webclient.Get(baseUrl + element + `?search_text=${searchText}`, token!)
+            response = await this.webclient.Get(baseUrl + element + `?search_text=${searchText}&marketplaces=${marketplaces}`, token!)
     
             if (response.statusCode !== 200){
                 return false
