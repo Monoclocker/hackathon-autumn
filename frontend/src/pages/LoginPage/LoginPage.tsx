@@ -5,12 +5,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import Input from '../../components/Input/Input';
 import ButtonForm from '../../components/ButtonForm/ButtonForm';
-<<<<<<< HEAD
 import { authAPI } from '../../api/authAPI';
 import GetUserRequest from '../../dto/requests/auth/GetUserRequest';
-=======
 import MainLogo from '../../components/MainLogo/MainLogo';
->>>>>>> 5ba06309ead8ef2166321e1d8b8b6c69ab046d83
 
 export default function LoginPage() {
 
