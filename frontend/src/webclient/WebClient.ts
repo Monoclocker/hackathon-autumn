@@ -1,7 +1,7 @@
 export interface ApiStatus{
     statusCode: number,
     message?: string,
-    data?: any
+    data?: unknown
 }
 
 interface ErrorMessage{
@@ -14,7 +14,7 @@ export class WebClient{
 
     async Get(requestUrl: string, token: string = ""): Promise<ApiStatus> {
 
-        let response: Response = await fetch(requestUrl, {
+        const response: Response = await fetch(requestUrl, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -22,9 +22,9 @@ export class WebClient{
             }
         })
 
-        let status: ApiStatus = {statusCode: response.status}
+        const status: ApiStatus = {statusCode: response.status}
 
-        let responseBody = await response.json()
+        const responseBody = await response.json()
 
         if (response.status < 200 || response.status > 299){
             status.message = (responseBody as ErrorMessage).message
@@ -38,7 +38,7 @@ export class WebClient{
 
     async Post<TRequest>(requestUrl: string, requestBody: TRequest, token: string = ""): Promise<ApiStatus>{
 
-        let response: Response = await fetch(requestUrl, {
+        const response: Response = await fetch(requestUrl, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -47,9 +47,9 @@ export class WebClient{
             body: JSON.stringify(requestBody)
         })
 
-        let status: ApiStatus = {statusCode: response.status}
+        const status: ApiStatus = {statusCode: response.status}
 
-        let responseBody = await response.json()
+        const responseBody = await response.json()
 
         if (response.status < 200 || response.status > 299){
             status.message = (responseBody as ErrorMessage).message
@@ -63,7 +63,7 @@ export class WebClient{
 
     async Put<TRequest>(requestUrl: string, requestBody: TRequest, token: string = ""): Promise<ApiStatus>{
 
-        let response: Response = await fetch(requestUrl, {
+        const response: Response = await fetch(requestUrl, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -72,9 +72,9 @@ export class WebClient{
             body: JSON.stringify(requestBody)
         })
 
-        let status: ApiStatus = {statusCode: response.status}
+        const status: ApiStatus = {statusCode: response.status}
 
-        let responseBody = await response.json()
+        const responseBody = await response.json()
 
         if (response.status < 200 || response.status > 299){
             status.message = (responseBody as ErrorMessage).message
@@ -87,7 +87,7 @@ export class WebClient{
     }
 
     async Delete(requestUrl: string, token: string = ""): Promise<ApiStatus>{
-        let response: Response = await fetch(requestUrl, {
+        const response: Response = await fetch(requestUrl, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -95,9 +95,9 @@ export class WebClient{
             }
         })
 
-        let status: ApiStatus = {statusCode: response.status}
+        const status: ApiStatus = {statusCode: response.status}
 
-        let responseBody = await response.json()
+        const responseBody = await response.json()
 
         if (response.status < 200 || response.status > 299){
             status.message = (responseBody as ErrorMessage).message
