@@ -1,26 +1,32 @@
 import { PageResponse } from "../dto/responses/parser/PageResponse"
+import { SystemDataResponse } from "../dto/responses/parser/SystemDataResponse"
 import { WebClient } from "../webclient/WebClient"
 import { authAPI } from "./authAPI"
 
 const baseUrl: string = ""
-
-export const satomUrl = "satom"
-export const flowwowUrl = "flowwow"
-
-const dataUrls = [
-    satomUrl,
-    flowwowUrl
-]
+const getMarkerplace: string = "systemdata"
 
 export class parserAPI{
 
     private webclient: WebClient = new WebClient()
+
+    static readonly marketPlaces: string[] = [] 
     private auth: authAPI = new authAPI()
+
+    async getMarketplaces(){
+        const response = await this.webclient.Get(baseUrl + getMarkerplace)
+
+        if (response.statusCode !== 200){
+            return Array<string>()
+        }
+
+        return (response.data as SystemDataResponse).marketplaces
+    }
 
     async getData(searchText: string, marketplaces: string[]){
 
         marketplaces.forEach(element => {
-            if (dataUrls.filter((url) => url === element).length === 0){
+            if (marketplaces.filter((url) => url === element).length === 0){
                 throw new Error(`Marketplace ${element} doesn't support`)
             }
         });
