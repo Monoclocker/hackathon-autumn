@@ -1,11 +1,6 @@
 export interface ApiStatus{
     statusCode: number,
-    message?: string,
     data?: unknown
-}
-
-interface ErrorMessage{
-    message: string
 }
 
 export class WebClient{
@@ -18,19 +13,13 @@ export class WebClient{
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Authtorization': `Bearer ${token}`
+                'Authorization': `Bearer ${token}`
             }
         })
 
-        const status: ApiStatus = {statusCode: response.status}
-
-        const responseBody = await response.json()
-
-        if (response.status < 200 || response.status > 299){
-            status.message = (responseBody as ErrorMessage).message
-        }
-        else{
-            status.data = responseBody
+        const status: ApiStatus = {
+            statusCode: response.status, 
+            data: await response.json()
         }
 
         return status
@@ -42,20 +31,14 @@ export class WebClient{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authtorization': `Bearer ${token}`
+                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify(requestBody)
         })
 
-        const status: ApiStatus = {statusCode: response.status}
-
-        const responseBody = await response.json()
-
-        if (response.status < 200 || response.status > 299){
-            status.message = (responseBody as ErrorMessage).message
-        }
-        else{
-            status.data = responseBody
+        const status: ApiStatus = {
+            statusCode: response.status, 
+            data: await response.json()
         }
 
         return status
@@ -67,20 +50,14 @@ export class WebClient{
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
-                'Authtorization': `Bearer ${token}`
+                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify(requestBody)
         })
 
-        const status: ApiStatus = {statusCode: response.status}
-
-        const responseBody = await response.json()
-
-        if (response.status < 200 || response.status > 299){
-            status.message = (responseBody as ErrorMessage).message
-        }
-        else{
-            status.data = responseBody
+        const status: ApiStatus = {
+            statusCode: response.status, 
+            data: await response.json()
         }
 
         return status
@@ -91,19 +68,13 @@ export class WebClient{
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
-                'Authtorization': `Bearer ${token}`
+                'Authorization': `Bearer ${token}`
             }
         })
 
-        const status: ApiStatus = {statusCode: response.status}
-
-        const responseBody = await response.json()
-
-        if (response.status < 200 || response.status > 299){
-            status.message = (responseBody as ErrorMessage).message
-        }
-        else{
-            status.data = responseBody
+        const status: ApiStatus = {
+            statusCode: response.status, 
+            data: await response.json()
         }
 
         return status

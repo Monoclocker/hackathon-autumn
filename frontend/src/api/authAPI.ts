@@ -9,12 +9,15 @@ const LoginPath = BaseUrl + ""
 const RegisterPath = BaseUrl + ""
 const Refresh = BaseUrl + ""
 
+
+
 export class authAPI{
     
-    webclient: WebClient = new WebClient()
+    private webclient: WebClient = new WebClient()
 
     async Login(loginData: GetUserRequest){
         const status = await this.webclient.Post(LoginPath, loginData)
+        
         if (status.statusCode !== 200){
             return status
         }

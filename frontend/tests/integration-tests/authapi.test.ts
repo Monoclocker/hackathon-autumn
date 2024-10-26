@@ -4,6 +4,7 @@ import { ApiStatus } from '../../src/webclient/WebClient';
 import { faker } from '@faker-js/faker';
 
 describe('auth tests', () =>{
+    
     test('register user should be success', async () =>{
         const api = new authAPI()
         const status = await api.Register({
